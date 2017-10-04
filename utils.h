@@ -1,5 +1,5 @@
-#ifndef DOSMATCHER_DOS_H
-#define DOSMATCHER_DOS_H
+#ifndef DOSMATCHER_UTILS_H
+#define DOSMATCHER_UTILS_H
 
 #include "types.h"
 
@@ -13,6 +13,46 @@ static void print(char *string)
     : "ah");                    // clobber ah
 }
 
+
+
+//void * x_memset (void* dest, int nByte, unsigned short count)
+//{
+//    asm volatile (
+//        "mov $0x0C, %ah\n"  // pixel plot
+//        "mov $0x02, %al\n"  // what color (green dark)
+//        "mov $0x2F, %cx\n"  // x location, from 0..319
+//        "mov $0x2F, %dx\n"  // y location, from 0..199
+//        "int $0x10"         // do it
+//    );
+//    asm volatile (
+//        "mov ecx, [count]\n"
+//        "mov edi, [dest]\n"
+//        "mov eax, [nByte]\n"
+//        "mov ebx, ecx\n"
+//        "rep stosb\n"
+//        : /* no output */
+//        : "a"(nByte), "d"(dest), "c"(count)
+//        :
+//    );
+//}
+
+/*void *memset(void *s, int c, size_t n)
+{
+    int i;
+    char *ss = (char *) s;
+
+    for (i = 0; i < (int)n; i++)
+        ss[i] = c;
+    asm volatile (
+    "cld\n"
+            "rep\n"
+            "stosb"
+    :
+    : "a"(c), "D"(ss), "c"(n)
+    );
+    return s;
+}*/
+
 static void * my_memset(void *dst, int c, size_t n)
 {
     if (n) {
@@ -23,5 +63,15 @@ static void * my_memset(void *dst, int c, size_t n)
     }
     return dst;
 }
+/*
+void* my_memset(void *s, int c, size_t len) {
+    unsigned char *dst = s;
+    while (len > 0) {
+        *dst = (unsigned char) c;
+        dst++;
+        len--;
+    }
+    return s;
+}*/
 
-#endif //DOSMATCHER_DOS_H
+#endif //DOSMATCHER_UTILS_H

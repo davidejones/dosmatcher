@@ -56,6 +56,10 @@ struct KEYBOARD check_key()
 
     kb.KEY_LOW = kb.KEY & 0xff;
     kb.KEY_HIGH = (kb.KEY >> 8) & 0xff;
+    // http://stackoverflow.com/questions/2876275/what-are-the-ascii-values-of-up-down-left-right
+    //int lo = k.KEY & 0xff;
+    //int hi = (k.KEY & 0xFF00) >> 8;
+    //k.KEY = (lo == 0) ? hi + 256 : lo;
     return kb;
 }
 
